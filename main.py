@@ -1,7 +1,4 @@
 # This is a sample Python script.
-from asyncio import wait
-
-
 from army import Army
 
 from units import Cavalry, Infantry
@@ -28,18 +25,22 @@ def input_army():
     size = int(input("Rozmiar armii: "))
     experience = int(input("Doświadczenie jednostek[1,5]: "))
 
-    army = Army(size, unit_class(name), experience)  # wywołanie konstruktora klasy
+    army = Army(size, unit_class(name, experience))  # wywołanie konstruktora klasy
 
     return army
 
 def start(frontline_size):
     # Use a breakpoint i the code line below to debug your script.
+    #TUI input
     #print("Konfiguracja pierwszej armii:")
     #army1 = input_army()
-    army1 = Army(10000, Infantry("BPP"), 3)
     #print("Konfiguracja drugiej armii:")
     #army2 = input_army()
-    army2 = Army(12000,Infantry("BPP"), 2)
+
+    #TEST input
+    army1 = Army(10000, Infantry("BPP", 1))
+    army2 = Army(12000,Infantry("BPP", 2))
+
     ##########################################
     army1.set_parameters(army2)
     army2.set_parameters(army1)
