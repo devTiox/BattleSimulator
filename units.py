@@ -18,8 +18,23 @@ class Infantry(Unit):
         super().__init__(name, 1, experience)
 
 #--------------------------------------
-class Cavalry(Unit):
+class Knights(Unit):
     def __init__(self, name, experience):
         super().__init__(name, 2, experience)
+
+#--------------------------------------
+class Cavalry(Unit):
+    def __init__(self, name, experience):
+        super().__init__(name, 3, experience)
+
+# --------------------------------------
+class Hussars(Unit):
+    def __init__(self, name, experience):
+        super().__init__(name, 4, experience)
+
+# --------------------------------------
+class Kapitan_Bomba(Unit):
+    def __init__(self, name, experience):
+        super().__init__(name, 5, experience)
 
 # --------------------------------------

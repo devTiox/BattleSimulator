@@ -84,16 +84,5 @@ class Army:
         self.collapse_desertion = self.current_size
         self.current_size = 0
 
-    def show_army(self):
-        print("Unit:")
-        self.units.show_unit()
-        print("Size:", self.current_size,
-              "\nTotal Loss:", self.total_loss, "\tTurn Loss:", self.turn_loss,
-              "\nTotal desertion:", self.total_desertion,"\tTurn Desertion", self.turn_desertion,
-              "\nMorale:", self.morale,"\tEfficiency:", self.efficiency,"\tCombat tiredness", self.tiredness)
-        print("###########################################")
-        if(self.routed == True):
-            print("Army ",self.units.name, " collapsed at:",self.collapse_desertion,"units")
-
 def clamp(value, min_val, max_val):
     return max(min_val, min(value, max_val))
