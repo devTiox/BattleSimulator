@@ -1,24 +1,18 @@
 # This is a sample Python script.
-from army import Army
 import TUI
-from units import *
 import copy as cp
 
-
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
 def start():
-    # Use a breakpoint i the code line below to debug your script.
     #TUI input
-    #frontline_size = int(input("Długość lini starcia: "))
+    frontline_size = int(input("Długość lini starcia: "))
 
-    #army1 = TUI.input_army()
-    #army2 = TUI.input_army()
+    army1 = TUI.input_army()
+    army2 = TUI.input_army()
 
     #TEST input
-    army1 = Army(10000, Infantry("BPP", 1))
-    army2 = Army(12000,Infantry("BPP", 2))
-    frontline_size = 1000
+    #army1 = Army(10000, Infantry("BPP", 1))
+    #army2 = Army(12000,Infantry("BPP", 2))
+    #frontline_size = 1000
 
     ##########################################
     army1.set_parameters(army2)
@@ -44,8 +38,8 @@ def start():
         army1.morale_change(army2, fight_duration, turn_duration)
         army2.morale_change(army1, fight_duration, turn_duration)
 
-        #TUI.show_army(army1)
-        #TUI.show_army(army2)
+        TUI.show_army(army1)
+        TUI.show_army(army2)
         fight_duration+=1
         time += turn_duration
         TUI.Storage.Time.append(cp.copy(time))
@@ -53,7 +47,7 @@ def start():
         TUI.Storage.A2array.append(cp.deepcopy(army2))
 
     print("\n\n###########################################")
-    TUI.plot_armies_stats();
+    TUI.plot_armies_stats()
 
 
 def display_time(fight_duration, time):

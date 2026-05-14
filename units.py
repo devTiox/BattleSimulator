@@ -33,7 +33,7 @@ class Hussars(Unit):
         super().__init__(name, 4, experience)
 
 # --------------------------------------
-class Kapitan_Bomba(Unit):
+class KapitanBomba(Unit):
     def __init__(self, name, experience):
         super().__init__(name, 5, experience)
 

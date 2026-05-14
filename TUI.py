@@ -18,9 +18,8 @@ def show_army(army):
           "\nTotal desertion:", army.total_desertion, "\tTurn Desertion", army.turn_desertion,
           "\nMorale:", army.morale, "\tEfficiency:", army.efficiency, "\tCombat tiredness", army.tiredness)
     print("###########################################")
-    if (army.routed == True):
+    if army.routed:
         print("Army ", army.units.name, " collapsed at:", army.collapse_desertion, "units")
-
 
 def show_army_basic(army):
     print("Size:", army.current_size,
@@ -36,7 +35,7 @@ def input_army():
         "Knights": Knights,
         "Cavalry": Cavalry,
         "Hussars":  Hussars,
-        "Kapitan Bomba": Kapitan_Bomba
+        "Kapitan Bomba": KapitanBomba
     }
 
     choice = questionary.select(
@@ -53,10 +52,6 @@ def input_army():
     army = Army(size, unit_class(name, experience))  # wywołanie konstruktora klasy
 
     return army
-
-import matplotlib.pyplot as plt
-import math
-
 
 def plot_armies_stats():
     time = Storage.Time
