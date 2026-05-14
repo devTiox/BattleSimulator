@@ -34,6 +34,7 @@ def start():
 
     TUI.Storage.A1array.append(cp.deepcopy(army1))
     TUI.Storage.A2array.append(cp.deepcopy(army2))
+    TUI.Storage.Time.append(cp.copy(time))
 
     while army2.current_size > 1 and army1.current_size > 1:
         display_time(fight_duration, time)
@@ -43,18 +44,16 @@ def start():
         army1.morale_change(army2, fight_duration, turn_duration)
         army2.morale_change(army1, fight_duration, turn_duration)
 
-        TUI.show_army(army1)
-        TUI.show_army(army2)
-
+        #TUI.show_army(army1)
+        #TUI.show_army(army2)
+        fight_duration+=1
+        time += turn_duration
+        TUI.Storage.Time.append(cp.copy(time))
         TUI.Storage.A1array.append(cp.deepcopy(army1))
         TUI.Storage.A2array.append(cp.deepcopy(army2))
 
-        fight_duration+=1
-        time += turn_duration
-
     print("\n\n###########################################")
-    print("Arrays:")
-    TUI.Storage.print_arrays()
+    TUI.plot_armies_stats();
 
 
 def display_time(fight_duration, time):
