@@ -42,7 +42,7 @@ class Army:
             self.route()
             #return
 
-        self.turn_loss = int(enemy.efficiency * frontline_size * turn_duration * 2)
+        self.turn_loss = int(enemy.efficiency * enemy.units.miss_ratio * frontline_size * turn_duration)
         self.turn_loss = clamp(self.turn_loss, 0, self.current_size)
 
 

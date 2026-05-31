@@ -2,12 +2,18 @@
 import TUI
 import copy as cp
 
+from TUI import choose_model
+
+
 def start():
     #TUI input
-    frontline_size = int(input("Długość lini starcia: "))
+    model = choose_model()
+    print("Model chosen: ", model)
+    if model == "Linear":
+        frontline_size = int(input("Frontline size: "))
 
-    army1 = TUI.input_army()
-    army2 = TUI.input_army()
+    army1 = TUI.input_army(model)
+    army2 = TUI.input_army(model)
 
     #TEST input
     #army1 = Army(10000, Infantry("BPP", 1))
@@ -22,18 +28,25 @@ def start():
     TUI.show_army(army2)
     fight_duration = 0
     #turn_duration = 1 => 1 turn = 1 hour
-    turn_duration = float(input("Wybierz długość tury(0;1] 1 = godzina:"))
+    turn_duration = float(input("Turn length(0;1] 1 = 1 hour:"))
     turn_duration = max(turn_duration, 0.1)
     time = 0
 
+    TUI.Storage.A1name = army1.units.name
+    TUI.Storage.A2name = army2.units.name
     TUI.Storage.A1array.append(cp.deepcopy(army1))
     TUI.Storage.A2array.append(cp.deepcopy(army2))
     TUI.Storage.Time.append(cp.copy(time))
 
     while army2.current_size > 1 and army1.current_size > 1:
         display_time(fight_duration, time)
-        army1.size_change(army2, frontline_size, turn_duration)
-        army2.size_change(army1, frontline_size, turn_duration)
+        if model == "Linear":
+            army1.size_change(army2, frontline_size, turn_duration)
+            army2.size_change(army1, frontline_size, turn_duration)
+        else:
+            a1_size = army1.current_size
+            army1.size_change(army2, army2.current_size, turn_duration)
+            army2.size_change(army1, a1_size, turn_duration)
 
         army1.morale_change(army2, fight_duration, turn_duration)
         army2.morale_change(army1, fight_duration, turn_duration)
@@ -59,6 +72,3 @@ def display_time(fight_duration, time):
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
     start()
-
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/

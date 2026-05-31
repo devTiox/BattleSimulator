@@ -27,29 +27,47 @@ def show_army_basic(army):
           "\tMorale:", army.morale, "\tEfficiency:", army.efficiency)
     print("###########################################")
 
-def input_army():
-    print("Konfiguracja armii:")
+def choose_model():
+    models_list = ["Linear", "Quadratic"]
+    choice = questionary.select(
+        "Choose model:",
+        choices=list(models_list)
+    ).ask()
 
-    unit_classes = {
-        "Infantry": Infantry,
-        "Knights": Knights,
-        "Cavalry": Cavalry,
-        "Hussars":  Hussars,
-        "Kapitan Bomba": KapitanBomba
-    }
+    return choice
+
+
+def input_army(model):
+    print("Army configuration:")
+    if model == "Linear":
+       unit_classes = {
+            "Infantry": Infantry,
+            "Knights": Knights,
+            "Cavalry": Cavalry,
+            "Hussars":  Hussars,
+            "Kapitan Bomba": KapitanBomba
+        }
+    else:
+        unit_classes = {
+            "Slingers": Slingers,
+            "Archers": Archers,
+            "Crossbowmen": Crossbowmen,
+            "Musketeers": Musketeers,
+            "Artillery": Artillery
+        }
 
     choice = questionary.select(
-        "Wybierz jednostkę:",
+        "Chose unit:",
         choices=list(unit_classes.keys())
     ).ask()
 
-    unit_class = unit_classes[choice]  # teraz to jest klasa
+    unit_class = unit_classes[choice]
 
-    name = input("Nazwa armii: ")
-    size = int(input("Rozmiar armii: "))
-    experience = int(input("Doświadczenie jednostek[1,5]: "))
+    name = input("Name of army: ")
+    size = int(input("Size of army: "))
+    experience = int(input("Units experience[1,5]: "))
 
-    army = Army(size, unit_class(name, experience))  # wywołanie konstruktora klasy
+    army = Army(size, unit_class(name, experience))
 
     return army
 
@@ -93,8 +111,8 @@ def plot_armies_stats():
                 for a in Storage.A2array
             ]
 
-            ax.plot(time, army1_values, label="Army 1")
-            ax.plot(time, army2_values, label="Army 2")
+            ax.plot(time, army1_values, label=Storage.A1name)
+            ax.plot(time, army2_values, label=Storage.A2name)
 
             ax.set_title(title)
 
@@ -110,7 +128,9 @@ def plot_armies_stats():
 
 class Storage:
     A1array = []
+    A1name = ""
     A2array = []
+    A2name = ""
     Time = []
 
     @staticmethod
